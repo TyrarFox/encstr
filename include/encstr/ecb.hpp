@@ -11,8 +11,8 @@ namespace encstr
         using key_type = typename cipher_type::key_type;
         using iv_type = block_type;
 
-        constexpr static auto key_size = typename cipher_type::key_size;
-        constexpr static auto block_size = typename cipher_type::block_size;
+        constexpr static auto key_size = cipher_type::key_size;
+        constexpr static auto block_size = cipher_type::block_size;
 
         template<size_t Size>
         ENCSTR_ALWAYS_INLINE static constexpr std::array<uint8_t, Size> encrypt(std::array<uint8_t, Size> input, key_type key, iv_type) noexcept
