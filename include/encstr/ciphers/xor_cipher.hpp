@@ -11,7 +11,7 @@ namespace encstr::ciphers
     constexpr size_t xor_default_key_size_max = 16;
 
     template<size_t BlockSize = xor_default_block_size, size_t KeySize = std::clamp(BlockSize, xor_default_key_size_min, xor_default_key_size_max)>
-    struct xor_cipher_t
+    struct basic_xor_cipher_t
     {
         constexpr static size_t block_size = BlockSize;
         constexpr static size_t key_size = KeySize;
@@ -50,4 +50,6 @@ namespace encstr::ciphers
         }
         ENCSTR_ALWAYS_INLINE constexpr static block_type decode(block_type input, key_type key) noexcept { return encode(input, key); }
     };
+
+    using xor_cipher_t = basic_xor_cipher_t<xor_default_block_size, std::clamp<size_t>(xor_default_block_size, xor_default_key_size_min, xor_default_key_size_max)>;
 }

@@ -7,8 +7,8 @@
 
 int main()
 {
-    using encoder = encstr::cbc_t<encstr::ciphers::xtea_cipher_t<encstr::ciphers::xtea_default_rounds, encstr::ciphers::xtea_default_delta>>;
-    std::cout << ENCRYPT_STRING_AUTO(char, encoder, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean volutpat et erat sed volutpat. Duis fringilla.");
+    using encoder = encstr::cbc_t<encstr::ciphers::xtea_cipher_t>;
+    std::cout << ENCRYPT_STRING_AUTO_A(encoder, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean volutpat et erat sed volutpat. Duis fringilla.");
 
     std::cin.get();
 

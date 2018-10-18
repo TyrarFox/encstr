@@ -11,7 +11,7 @@ namespace encstr::ciphers
     constexpr uint32_t xtea_default_delta = 0x9e3779b9u;
 
     template<size_t Rounds = xtea_default_rounds, uint32_t Delta = xtea_default_delta>
-    struct xtea_cipher_t
+    struct basic_xtea_cipher_t
     {
         constexpr static size_t block_size = 8;
         constexpr static size_t key_size = 16;
@@ -93,4 +93,6 @@ namespace encstr::ciphers
             return decoder.data;
         }
     };
+
+    using xtea_cipher_t = basic_xtea_cipher_t<xtea_default_rounds, xtea_default_delta>;
 }

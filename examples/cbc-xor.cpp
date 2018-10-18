@@ -6,8 +6,8 @@
 
 int main()
 {
-    using encoder = encstr::cbc_t<encstr::ciphers::xor_cipher_t<encstr::ciphers::xor_default_block_size>>;
-    std::cout << ENCRYPT_STRING_AUTO(char, encoder, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean volutpat et erat sed volutpat. Duis fringilla.");
+    using encoder = encstr::cbc_t<encstr::ciphers::xor_cipher_t>;
+    std::cout << ENCRYPT_STRING_AUTO_A(encoder, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean volutpat et erat sed volutpat. Duis fringilla.");
 
     std::cin.get();
 
