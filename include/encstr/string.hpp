@@ -68,11 +68,11 @@ namespace encstr
 	};
 }
 
-#define MAKE_ENCRYPTED_STRING(CharT, EncryptorT, Str, Key, IV) encstr::string_t<CharT, EncryptorT, std::make_index_sequence<(sizeof(Str) - sizeof(CharT)) / sizeof(CharT)>>(Str, Key, IV)
+#define MAKE_ENCRYPTED_STRING(CharT, EncryptorT, Str, Key, IV) encstr::string_t<CharT, EncryptorT, std::make_index_sequence<std::size(Str) - 1>>(Str, Key, IV)
 #define MAKE_ENCRYPTED_STRING_AUTO(CharT, EncryptorT, Str) MAKE_ENCRYPTED_STRING(CharT, EncryptorT, Str, encstr::generate_random_block<__COUNTER__, EncryptorT::key_size>(), encstr::generate_random_block<__COUNTER__, EncryptorT::block_size>())
 
-#define ENCRYPT_STRING(CharT, EncryptorT, Str, Key, IV) []() { constexpr encstr::string_t<CharT, EncryptorT, std::make_index_sequence<(sizeof(Str) - sizeof(CharT)) / sizeof(CharT)>> str(Str, Key, IV); return str; }().decrypt()
-#define ENCRYPT_STRING_AUTO(CharT, EncryptorT, Str) []() { constexpr encstr::string_t<CharT, EncryptorT, std::make_index_sequence<(sizeof(Str) - sizeof(CharT)) / sizeof(CharT)>> str(Str, encstr::generate_random_block<__COUNTER__, EncryptorT::key_size>(), encstr::generate_random_block<__COUNTER__, EncryptorT::block_size>()); return str; }().decrypt()
+#define ENCRYPT_STRING(CharT, EncryptorT, Str, Key, IV) []() { constexpr encstr::string_t<CharT, EncryptorT, std::make_index_sequence<std::size(Str) - 1>> str(Str, Key, IV); return str; }().decrypt()
+#define ENCRYPT_STRING_AUTO(CharT, EncryptorT, Str) []() { constexpr encstr::string_t<CharT, EncryptorT, std::make_index_sequence<std::size(Str) - 1>> str(Str, encstr::generate_random_block<__COUNTER__, EncryptorT::key_size>(), encstr::generate_random_block<__COUNTER__, EncryptorT::block_size>()); return str; }().decrypt()
 
 #define MAKE_ENCRYPTED_STRING_A(EncryptorT, Str, Key, IV) MAKE_ENCRYPTED_STRING(char, EncryptorT, Str, Key, IV)
 #define MAKE_ENCRYPTED_STRING_W(EncryptorT, Str, Key, IV) MAKE_ENCRYPTED_STRING(wchar_t, EncryptorT, Str, Key, IV)
